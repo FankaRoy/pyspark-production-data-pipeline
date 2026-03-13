@@ -74,6 +74,9 @@ pyspark-production-data-pipeline
 
 ## Running the Pipeline
 
+### Environment Note
+This project was executed successfully in WSL/Ubuntu with Java 17 and PySpark 4.1.1.
+
 ### 1. Clone the repository
 
 ```bash
@@ -83,7 +86,7 @@ cd pyspark-production-data-pipeline
 python3 -m venv pyspark-venv
 source pyspark-venv/bin/activate
 3. Install dependencies
-pip install pyspark pandas numpy
+pip install -r requirements.txt
 4. Generate synthetic data
 python scripts/generate_synthetic_data.py
 5. Run the pipeline
