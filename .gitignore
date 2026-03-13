@@ -1,0 +1,14 @@
+# Python virtual environments
+venv/
+
+# Python cache
+__pycache__/
+
+# Spark output
+data/processed/
+
+# OS junk files
+.DS_Store
+Thumbs.db
+
+*.save
