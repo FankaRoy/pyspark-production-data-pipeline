@@ -26,7 +26,7 @@ The pipeline performs the following tasks:
 4. **Distributed Output**
    - Writes processed data using Spark to a structured output directory.
 
----
+```
 
 ## Project Structure
 
@@ -60,7 +60,7 @@ pyspark-production-data-pipeline
 ├── .gitignore
 └── README.md
 
----
+```
 
 ## Technologies Used
 
