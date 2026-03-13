@@ -73,6 +73,11 @@ pyspark-production-data-pipeline
 ---
 
 ## Running the Pipeline
+Generate synthetic data and run the pipeline:
+make run
+
+Clean generated output:
+make clean
 
 ### Environment Note
 This project was executed successfully in WSL/Ubuntu with Java 17 and PySpark 4.1.1.
