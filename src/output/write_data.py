@@ -13,10 +13,10 @@ def write_csv(df: DataFrame, output_path: str) -> None:
 
     (
         df.write
-        .mode("overwrite")
+        .mode("append")
         .option("header", True)
 	.partitionBy("year")
         .csv(output_path)
     )
 
-    print(f"Data written to: {output_path}")
+    print(f"Data written incrementally to: {output_path}")

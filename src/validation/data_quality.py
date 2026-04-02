@@ -35,4 +35,4 @@ def validate_data(df: DataFrame) -> None:
     if invalid_currency > 0:
         raise ValueError("Invalid currency values detected")
 
-    print("Data validation passed")
+    print(f"✅ Data validation passed | rows={df.count()}")
