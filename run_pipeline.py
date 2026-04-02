@@ -5,7 +5,7 @@
 """
 Created on Sat Feb 28 14:40:50 2026
 
-@author: MEAL ASSISTANT 1
+@author: Walter Roye T. Fanka
 """
 
 from src.pipelines.batch_pipeline import run_pipeline
