@@ -6,7 +6,11 @@ Created on Sat Feb 28 13:36:18 2026
 """
 
 from pyspark.sql import SparkSession
-from pyspark.sql.types import *
+from pyspark.sql.types import (
+    StructType, StructField, IntegerType, DoubleType,
+    StringType, TimestampType
+)
+
 
 def read_transactions(spark: SparkSession, path: str):
     schema = StructType([
@@ -18,6 +22,8 @@ def read_transactions(spark: SparkSession, path: str):
         StructField("channel", StringType(), True),
         StructField("country", StringType(), True),
         StructField("is_fraud", IntegerType(), True),
+        StructField("batch_id", StringType(), True),
+        StructField("load_timestamp", TimestampType(), True),
     ])
 
     return spark.read.csv(
