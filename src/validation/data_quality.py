@@ -2,21 +2,37 @@
 """
 Created on Sat Feb 28 13:49:28 2026
 
-@author: MEAL ASSISTANT 1
+@author: Walter Roye T. Fanka
 """
-
+from pyspark.sql import DataFrame
 from pyspark.sql.functions import col
 
-def validate_transactions(df):
-    checks = {
-        "null_amounts": df.filter(col("amount").isNull()).count(),
-        "negative_amounts": df.filter(col("amount") < 0).count(),
-        "invalid_currency": df.filter(~col("currency").isin("USD", "EUR", "GBP")).count(),
-    }
 
-    failed = {k: v for k, v in checks.items() if v > 0}
+def validate_data(df: DataFrame) -> None:
+    """
+    Production-style data quality checks.
+    Raises exception if validation fails.
+    """
 
-    if failed:
-        raise ValueError(f"Data quality checks failed: {failed}")
+    # 1. Null checks
+    null_counts = df.select([
+        col(c).isNull().cast("int").alias(c)
+        for c in ["transaction_id", "customer_id", "amount"]
+    ])
 
-    return df
+    if null_counts.groupBy().sum().collect()[0][0] > 0:
+        raise ValueError("Null values found in critical columns")
+
+    # 2. Negative amount check
+    negative_count = df.filter(col("amount") < 0).count()
+    if negative_count > 0:
+        raise ValueError("Negative transaction amounts detected")
+
+    # 3. Valid currency check
+    valid_currencies = ["USD", "EUR", "GBP"]
+    invalid_currency = df.filter(~col("currency").isin(valid_currencies)).count()
+
+    if invalid_currency > 0:
+        raise ValueError("Invalid currency values detected")
+
+    print("Data validation passed")
